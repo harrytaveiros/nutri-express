@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,15 +25,16 @@ public class Prato {
 
     private String nome;
     private String descricao;
-    private Double preco;
+    private BigDecimal valor;
+    private String categoria;
     private Integer calorias;
-    private Boolean disponivel;
-    private Long categoriaId;
+    private Double quantidade;
+    private String unidadeMedida;
 
-    public Prato(String nome, String descricao, Double preco) {
+    public Prato(String nome, String descricao, BigDecimal valor) {
         this.nome = nome;
         this.descricao = descricao;
-        this.preco = preco;
+        this.valor = valor;
     }
 
 }
