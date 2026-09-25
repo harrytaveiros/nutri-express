@@ -7,9 +7,7 @@ import br.com.nutriexpress.demo.model.Prato;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PratoService {
@@ -20,10 +18,6 @@ public class PratoService {
         this.pratoRepository = pratoRepository;
     }
 
-    // Simulação temporária do banco de dados
-    private final List<Prato> bancoDeDadosSimulado = new ArrayList<>();
-    private Long proximoId = 1L;
-
     public PratoResponseDTO criar(PratoRequestDTO dto) {
         // Verifica se já existe um prato cadastrado com este nome
         if (pratoRepository.existsByNome(dto.nome())) {
@@ -31,23 +25,16 @@ public class PratoService {
         }
 
         Prato prato = toEntity(dto);
+        Prato pratoSalvo = pratoRepository.save(prato);
         
-        prato.setId(proximoId++);
-        bancoDeDadosSimulado.add(prato);
-        
-        return toDTO(prato);
+        return toDTO(pratoSalvo);
     }
 
     public PratoResponseDTO buscarPorId(Long id) {
-        Optional<Prato> pratoEncontrado = bancoDeDadosSimulado.stream()
-                .filter(p -> p.getId().equals(id))
-                .findFirst();
+        Prato pratoEncontrado = pratoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Prato não encontrado com o ID: " + id));
 
-        if(pratoEncontrado.isPresent()){
-             return toDTO(pratoEncontrado.get());
-        } else {
-             throw new RuntimeException("Prato não encontrado com o ID: " + id);
-        }
+        return toDTO(pratoEncontrado);
     }
 
     // Método para listar todos ou filtrar por categoria
