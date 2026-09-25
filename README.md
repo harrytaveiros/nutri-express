@@ -5,9 +5,8 @@ API REST para um aplicativo de delivery de comida saudável, desenvolvida em Spr
 ## 🚀 Como executar o projeto
 
 1. Certifique-se de ter o Java 17+ e o Maven instalados.
-2. Tenha uma instância do PostgreSQL rodando localmente na porta 5432.
-3. Configure as credenciais do banco no arquivo `src/main/resources/application.properties`.
-4. Execute a aplicação pela classe `DemoApplication.java` ou via terminal com o comando `mvn spring-boot:run`.
+2. O projeto utiliza a base de dados embutida H2 (ficheiro local). Não é necessária nenhuma instalação externa de bases de dados nem configuração de credenciais. Basta executar a aplicação com o comando Maven e a base será gerada automaticamente.
+3. Execute a aplicação pela classe `DemoApplication.java` ou via terminal com o comando `mvn spring-boot:run`.
 
 ## 📍 Endpoints Implementados
 
